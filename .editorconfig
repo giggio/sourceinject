@@ -11,6 +11,9 @@ max_line_length = 100
 [*.md]
 trim_trailing_whitespace = false
 
+[*.json]
+indent_size = 2
+
 [*.cs]
 # New line preferences
 csharp_new_line_before_open_brace = all
@@ -56,19 +59,19 @@ dotnet_naming_rule.constant_fields_should_be_camel_case.symbols = constant_field
 dotnet_naming_rule.constant_fields_should_be_camel_case.style = camel_case_style
 dotnet_naming_rule.constant_fields_should_be_camel_case.severity = suggestion
 
-# public symbols
-dotnet_naming_symbols.public_symbols.applicable_accessibilities = public
-# name all public symbols using PascalCase
-dotnet_naming_rule.public_symbols_should_be_pascal_case.symbols = public_symbols
-dotnet_naming_rule.public_symbols_should_be_pascal_case.style = pascal_case_style
-dotnet_naming_rule.public_symbols_should_be_pascal_case.severity = suggestion
-
 # parameter symbols
 dotnet_naming_symbols.parameter_symbols.applicable_kinds = parameter
 # name all parameter symbols using camelCase
 dotnet_naming_rule.parameter_symbols_should_be_camel_case.symbols = parameter_symbols
 dotnet_naming_rule.parameter_symbols_should_be_camel_case.style = camel_case_style
 dotnet_naming_rule.parameter_symbols_should_be_camel_case.severity = suggestion
+
+# Classes, namespaces, etc are PascalCase
+dotnet_naming_symbols.public_symbols.applicable_kinds = namespace, class, struct, interface, enum, property, method, field, event, delegate, type_parameter, local_function
+# name all Classes, namespaces etc using PascalCase
+dotnet_naming_rule.public_symbols_should_be_pascal_case.symbols = public_symbols
+dotnet_naming_rule.public_symbols_should_be_pascal_case.style = pascal_case_style
+dotnet_naming_rule.public_symbols_should_be_pascal_case.severity = suggestion
 
 # async style
 dotnet_naming_style.async_suffix_style.required_suffix = Async
@@ -142,3 +145,9 @@ csharp_space_between_method_declaration_name_and_open_parenthesis = false
 csharp_space_between_method_declaration_parameter_list_parentheses = false
 csharp_space_between_parentheses = false
 csharp_space_between_square_brackets = false
+
+# IDE1006: Naming Styles
+#dotnet_diagnostic.IDE1006.severity = silent
+
+# CA1710: Identifiers should have correct suffix
+#dotnet_diagnostic.CA1710.severity = none

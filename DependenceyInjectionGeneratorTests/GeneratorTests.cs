@@ -14,7 +14,7 @@ namespace DependenceyInjectionGeneratorTests
     {
         private readonly ITestOutputHelper output;
 
-        public GeneratorTests(ITestOutputHelper output) => this.output = output;
+        public GeneratorTests(ITestOutputHelper output) => this.output = output ?? throw new ArgumentNullException(nameof(output));
 
         [Fact]
         public void GeneratedCodeWithoutServicesWork()
