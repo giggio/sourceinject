@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 
@@ -7,6 +7,7 @@ namespace DependencyInjectionGenerator
     internal class ServicesReceiver : ISyntaxReceiver
     {
         public List<ClassDeclarationSyntax> ClassesToRegister { get; } = new();
+        public InvocationExpressionSyntax InvocationSyntaxNode { get; private set; }
         public bool HasCallToMethod { get; private set; }
 
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
@@ -26,8 +27,9 @@ namespace DependencyInjectionGenerator
                             }
                         }
                     }
-                })
+                } invocationSyntax)
             {
+                InvocationSyntaxNode = invocationSyntax;
                 HasCallToMethod = true;
             }
         }
