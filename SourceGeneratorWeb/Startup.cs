@@ -16,7 +16,6 @@ namespace SourceGeneratorWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<Models.ExampleService>();
             services.AddServicesToDI();
         }
 
