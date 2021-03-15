@@ -246,8 +246,8 @@ public static class GeneratedServicesExtension
             var driver = CSharpGeneratorDriver.Create(generator);
             driver.RunGeneratorsAndUpdateCompilation(compilation, out var outputCompilation, out var generateDiagnostics);
 
-            //var compileDiagnostics = outputCompilation.GetDiagnostics();
-            //compileDiagnostics.Any(d => d.Severity == DiagnosticSeverity.Error).ShouldBeFalse("Failed: " + compileDiagnostics.FirstOrDefault()?.GetMessage());
+            var compileDiagnostics = outputCompilation.GetDiagnostics();
+            compileDiagnostics.Any(d => d.Severity == DiagnosticSeverity.Error).ShouldBeFalse("Failed: " + compileDiagnostics.FirstOrDefault()?.GetMessage());
 
             generateDiagnostics.Any(d => d.Severity == DiagnosticSeverity.Error).ShouldBeFalse("Failed: " + generateDiagnostics.FirstOrDefault()?.GetMessage());
             return outputCompilation;
