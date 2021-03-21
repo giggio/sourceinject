@@ -46,18 +46,14 @@ internal class AddServiceAttribute : System.Attribute
 
             var invocationSemanticModel = context.Compilation.GetSemanticModel(receiver.InvocationSyntaxNode.SyntaxTree);
             var methodSyntax = receiver.InvocationSyntaxNode.FirstAncestorOrSelf<MethodDeclarationSyntax>();
-            if (methodSyntax == null)
-                return;
-            var methodSymbol = invocationSemanticModel.GetDeclaredSymbol(methodSyntax);
-            if (methodSymbol == null)
-                return;
+            var methodSymbol = methodSyntax == null ? null : invocationSemanticModel.GetDeclaredSymbol(methodSyntax);
             var code = $@"    public static class GeneratedServicesExtension
     {{
         public static void AddServicesToDI(this IServiceCollection services)
         {{
 {registrations}        }}
     }}";
-            if (methodSymbol.ContainingNamespace.IsGlobalNamespace)
+            if (methodSymbol == null || methodSymbol.ContainingNamespace.IsGlobalNamespace)
             {
                 var newClassCodeBuilder = new StringBuilder();
                 foreach (var line in code.Split(new[] { @"
