@@ -7,6 +7,7 @@ registered.
 
 <!-- [![Nuget count](https://img.shields.io/nuget/v/sourceinject.svg)](https://www.nuget.org/packages/sourceinject/) -->
 
+[![Build](https://github.com/giggio/sourceinject/actions/workflows/dotnet.yml/badge.svg)](https://github.com/giggio/sourceinject/actions/workflows/dotnet.yml)
 [![License](https://img.shields.io/github/license/giggio/sourceinject.svg)](https://github.com/giggio/sourceinject/blob/master/LICENSE.txt)
 
 ## How to use it
