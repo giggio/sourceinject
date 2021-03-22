@@ -4,7 +4,8 @@
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <PackageId>SourceInject</PackageId>
-        <Version>0.1.0</Version>
+        <VersionSuffix Condition="'$(VersionSuffix)' == ''">0</VersionSuffix>
+        <Version>0.1.$(VersionSuffix)</Version>
         <Authors>Giovanni Bassi</Authors>
         <PackageDescription>A source generator for C# that uses Roslyn (the C# compiler) to allow you to generate your dependencies injection during compile time.</PackageDescription>
         <RepositoryUrl>https://github.com/giggio/sourceinject.git</RepositoryUrl>

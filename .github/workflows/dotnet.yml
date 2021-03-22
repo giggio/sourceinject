@@ -23,6 +23,9 @@ jobs:
       - name: Test
         run: dotnet test --no-build --verbosity normal
       - name: Create nupkg
-        run: dotnet pack --configuration Release ./src/SourceInject/
-      # - name: Publish nupkg
-      #   run: dotnet nuget push ./src/SourceInject/bin/Release/*.nupkg
+        run: dotnet pack --configuration Release --version-suffix $GITHUB_RUN_NUMBER ./src/SourceInject/
+      - name: Publish nupkg
+        if: ${{ github.event_name != 'pull_request' }}
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
+        run: dotnet nuget push --api-key $NUGET_AUTH_TOKEN --source https://api.nuget.org/v3/index.json ./src/SourceInject/bin/Release/*.nupkg
