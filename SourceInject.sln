@@ -18,7 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceInject", "src\SourceI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceInjectTests", "test\SourceInjectTests\SourceInjectTests.csproj", "{A0EE3A74-0E98-41AB-B38A-B4741CFD591C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "test\ConsoleApp\ConsoleApp.csproj", "{856A5373-59B8-41DC-943E-4F840389B13D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "test\ConsoleApp\ConsoleApp.csproj", "{856A5373-59B8-41DC-943E-4F840389B13D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "test\Lib\Lib.csproj", "{3E4FC6A8-2FB3-47E1-9486-D03043492ADA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{856A5373-59B8-41DC-943E-4F840389B13D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{856A5373-59B8-41DC-943E-4F840389B13D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{856A5373-59B8-41DC-943E-4F840389B13D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E4FC6A8-2FB3-47E1-9486-D03043492ADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E4FC6A8-2FB3-47E1-9486-D03043492ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E4FC6A8-2FB3-47E1-9486-D03043492ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E4FC6A8-2FB3-47E1-9486-D03043492ADA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{F0412F0C-6FCD-4552-BD04-45F2B0F1668F} = {4A1CD940-EA03-4F0E-AC09-508520CE1896}
 		{A0EE3A74-0E98-41AB-B38A-B4741CFD591C} = {559D7005-0873-4DAB-962C-37D8B81319A2}
 		{856A5373-59B8-41DC-943E-4F840389B13D} = {559D7005-0873-4DAB-962C-37D8B81319A2}
+		{3E4FC6A8-2FB3-47E1-9486-D03043492ADA} = {559D7005-0873-4DAB-962C-37D8B81319A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2AEB76C-782C-480D-9579-3C3BB0F20B2E}
