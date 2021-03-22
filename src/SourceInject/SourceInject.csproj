@@ -3,7 +3,23 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
+        <PackageId>SourceInject</PackageId>
+        <Version>0.1.0</Version>
+        <Authors>Giovanni Bassi</Authors>
+        <PackageDescription>A source generator for C# that uses Roslyn (the C# compiler) to allow you to generate your dependencies injection during compile time.</PackageDescription>
+        <RepositoryUrl>https://github.com/giggio/sourceinject.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>source generator</PackageTags>
+        <PackageProjectUrl>https://github.com/giggio/sourceinject</PackageProjectUrl>
+        <Copyright>(c) Giovanni Bassi</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <IsPackable>true</IsPackable>
+        <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     </PropertyGroup>
+    <ItemGroup>
+        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2">
             <PrivateAssets>all</PrivateAssets>
