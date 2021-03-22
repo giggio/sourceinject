@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 
@@ -20,9 +21,46 @@ internal class InjectAttribute : System.Attribute
 {
     internal InjectAttribute(ServiceLifetime serviceLifetime = ServiceLifetime.Transient) { }
 }
+[System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+internal class InjectSingletonAttribute : System.Attribute
+{
+}
+[System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+internal class InjectScopedAttribute : System.Attribute
+{
+}
+[System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+internal class InjectTransientAttribute : System.Attribute
+{
+}
 ";
             context.RegisterForPostInitialization(context => context.AddSource("Inject.Generated.cs", SourceText.From(attribute, Encoding.UTF8)));
             context.RegisterForSyntaxNotifications(() => new ServicesReceiver());
+        }
+
+        private static Lifetime GetLifetime(IImmutableList<AttributeData> attributes)
+        {
+            if (attributes.Any(a => a.AttributeClass?.Name == "InjectSingletonAttribute"))
+                return Lifetime.Singleton;
+            if (attributes.Any(a => a.AttributeClass?.Name == "InjectScopedAttribute"))
+                return Lifetime.Scoped;
+            if (attributes.Any(a => a.AttributeClass?.Name == "InjectTransientAttribute"))
+                return Lifetime.Transient;
+            var injectAttribute = attributes.FirstOrDefault(a => a.AttributeClass?.Name == "InjectAttribute");
+            if (injectAttribute == null)
+                return Lifetime.None;
+            var injectArg = injectAttribute.ConstructorArguments.FirstOrDefault();
+            if (injectArg.IsNull || injectArg.Kind != TypedConstantKind.Enum || injectArg.Type?.ToString() != "Microsoft.Extensions.DependencyInjection.ServiceLifetime")
+                return Lifetime.None;
+            switch (injectArg.Value)
+            {
+                case 1: // scoped
+                    return Lifetime.Scoped;
+                case 2: // transient
+                    return Lifetime.Transient;
+                default: // 0 (singleton) or others
+                    return Lifetime.Singleton;
+            }
         }
 
         public void Execute(GeneratorExecutionContext context)
@@ -40,29 +78,23 @@ internal class InjectAttribute : System.Attribute
                 var symbol = semanticModel.GetDeclaredSymbol(clazz);
                 if (symbol == null)
                     return;
-                var injectAttribute = symbol.GetAttributes().FirstOrDefault(a => a.AttributeClass?.Name == "InjectAttribute");
-                if (injectAttribute == null)
-                    continue;
-                registrations.Append(spaces);
-                var injectArg = injectAttribute.ConstructorArguments.FirstOrDefault();
-                if (injectArg.IsNull || injectArg.Kind != TypedConstantKind.Enum || injectArg.Type?.ToString() != "Microsoft.Extensions.DependencyInjection.ServiceLifetime")
+                var lifetime = GetLifetime(symbol.GetAttributes());
+                switch (lifetime)
                 {
-                    continue;
-                }
-                else
-                {
-                    switch (injectArg.Value)
-                    {
-                        case 1: // scoped
-                            registrations.AppendLine($"services.AddScoped<{GetFullName(symbol)}>();");
-                            break;
-                        case 2: // transient
-                            registrations.AppendLine($"services.AddTransient<{GetFullName(symbol)}>();");
-                            break;
-                        default: // 0 (singleton) or others
-                            registrations.AppendLine($"services.AddSingleton<{GetFullName(symbol)}>();");
-                            break;
-                    }
+                    case Lifetime.Singleton:
+                        registrations.Append(spaces);
+                        registrations.AppendLine($"services.AddSingleton<{GetFullName(symbol)}>();");
+                        break;
+                    case Lifetime.Scoped:
+                        registrations.Append(spaces);
+                        registrations.AppendLine($"services.AddScoped<{GetFullName(symbol)}>();");
+                        break;
+                    case Lifetime.Transient:
+                        registrations.Append(spaces);
+                        registrations.AppendLine($"services.AddTransient<{GetFullName(symbol)}>();");
+                        break;
+                    default:
+                        break;
                 }
             }
 
@@ -119,6 +151,11 @@ using Microsoft.Extensions.DependencyInjection;
             if (nss.Any())
                 return $"{string.Join(".", nss)}.{symbol.Name}";
             return symbol.Name;
+        }
+
+        enum Lifetime
+        {
+            None, Singleton, Scoped, Transient
         }
     }
 }
