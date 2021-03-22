@@ -1,6 +1,8 @@
+using Microsoft.Extensions.DependencyInjection;
+
 namespace ConsoleApp
 {
-    [AddService]
+    [Inject]
     public class ExampleService
     {
         private readonly AnotherService anotherService;
@@ -11,9 +13,10 @@ namespace ConsoleApp
         public string GetValue() => anotherService.Value;
     }
 
-    [AddService]
+    [Inject(ServiceLifetime.Singleton)]
     public class AnotherService
     {
         public string Value => "Hello World!";
     }
 }
+
