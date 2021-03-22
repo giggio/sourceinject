@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{559D7005-0873-4DAB-962C-37D8B81319A2}"
@@ -20,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceInjectTests", "test\S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "test\ConsoleApp\ConsoleApp.csproj", "{856A5373-59B8-41DC-943E-4F840389B13D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "test\Lib\Lib.csproj", "{3E4FC6A8-2FB3-47E1-9486-D03043492ADA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lib", "test\Lib\Lib.csproj", "{3E4FC6A8-2FB3-47E1-9486-D03043492ADA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
