@@ -28,7 +28,7 @@ namespace WebApp
     {
         void M(IServiceCollection services)
         {
-            services.AddServicesToDI();
+            services.Discover();
         }
     }
 }";
@@ -63,7 +63,7 @@ namespace WebApp
 {
     public static class GeneratedServicesExtension
     {
-        public static void AddServicesToDI(this IServiceCollection services)
+        public static void Discover(this IServiceCollection services)
         {
         }
     }
@@ -84,7 +84,7 @@ namespace WebApp
     {
         void M(IServiceCollection services)
         {
-             services.AddServicesToDI();
+             services.Discover();
         }
     }
     [Inject]
@@ -102,7 +102,7 @@ namespace WebApp
 {
     public static class GeneratedServicesExtension
     {
-        public static void AddServicesToDI(this IServiceCollection services)
+        public static void Discover(this IServiceCollection services)
         {
             services.AddTransient<WebApp.MyService>();
         }
@@ -123,7 +123,7 @@ namespace WebApp
     {
         void M(IServiceCollection services)
         {
-             services.AddServicesToDI();
+             services.Discover();
         }
     }
     [Inject]
@@ -145,7 +145,7 @@ namespace WebApp
 {
     public static class GeneratedServicesExtension
     {
-        public static void AddServicesToDI(this IServiceCollection services)
+        public static void Discover(this IServiceCollection services)
         {
             services.AddTransient<WebApp.MyService1>();
             services.AddTransient<WebApp.MyService2>();
@@ -167,7 +167,7 @@ namespace MyNamespace
     {
         void M(IServiceCollection services)
         {
-             services.AddServicesToDI();
+             services.Discover();
         }
     }
     [Inject]
@@ -185,7 +185,7 @@ namespace MyNamespace
 {
     public static class GeneratedServicesExtension
     {
-        public static void AddServicesToDI(this IServiceCollection services)
+        public static void Discover(this IServiceCollection services)
         {
             services.AddTransient<MyNamespace.MyService>();
         }
@@ -204,7 +204,7 @@ class C
 {
     void M(IServiceCollection services)
     {
-         services.AddServicesToDI();
+         services.Discover();
     }
 }
 [Inject]
@@ -219,7 +219,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class GeneratedServicesExtension
 {
-    public static void AddServicesToDI(this IServiceCollection services)
+    public static void Discover(this IServiceCollection services)
     {
         services.AddTransient<MyService>();
     }
@@ -234,7 +234,7 @@ public static class GeneratedServicesExtension
             var source = @"
 using Microsoft.Extensions.DependencyInjection;
 var services = new ServiceCollection();
-services.AddServicesToDI();
+services.Discover();
 var serviceProvider = services.BuildServiceProvider();
 [Inject]
 class MyService
@@ -248,7 +248,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class GeneratedServicesExtension
 {
-    public static void AddServicesToDI(this IServiceCollection services)
+    public static void Discover(this IServiceCollection services)
     {
         services.AddTransient<MyService>();
     }
@@ -266,7 +266,7 @@ class C
 {
     void M(IServiceCollection services)
     {
-         services.AddServicesToDI();
+         services.Discover();
     }
 }
 [Inject(ServiceLifetime.Scoped)]
@@ -281,7 +281,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class GeneratedServicesExtension
 {
-    public static void AddServicesToDI(this IServiceCollection services)
+    public static void Discover(this IServiceCollection services)
     {
         services.AddScoped<MyService>();
     }
@@ -299,7 +299,7 @@ class C
 {
     void M(IServiceCollection services)
     {
-         services.AddServicesToDI();
+         services.Discover();
     }
 }
 [InjectScoped]
@@ -314,7 +314,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class GeneratedServicesExtension
 {
-    public static void AddServicesToDI(this IServiceCollection services)
+    public static void Discover(this IServiceCollection services)
     {
         services.AddScoped<MyService>();
     }
@@ -332,7 +332,7 @@ class C
 {
     void M(IServiceCollection services)
     {
-         services.AddServicesToDI();
+         services.Discover();
     }
 }
 [Inject(ServiceLifetime.Transient)]
@@ -347,7 +347,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class GeneratedServicesExtension
 {
-    public static void AddServicesToDI(this IServiceCollection services)
+    public static void Discover(this IServiceCollection services)
     {
         services.AddTransient<MyService>();
     }
@@ -365,7 +365,7 @@ class C
 {
     void M(IServiceCollection services)
     {
-         services.AddServicesToDI();
+         services.Discover();
     }
 }
 [InjectTransient]
@@ -380,7 +380,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class GeneratedServicesExtension
 {
-    public static void AddServicesToDI(this IServiceCollection services)
+    public static void Discover(this IServiceCollection services)
     {
         services.AddTransient<MyService>();
     }
@@ -398,7 +398,7 @@ class C
 {
     void M(IServiceCollection services)
     {
-         services.AddServicesToDI();
+         services.Discover();
     }
 }
 [Inject(ServiceLifetime.Singleton)]
@@ -413,7 +413,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class GeneratedServicesExtension
 {
-    public static void AddServicesToDI(this IServiceCollection services)
+    public static void Discover(this IServiceCollection services)
     {
         services.AddSingleton<MyService>();
     }
@@ -431,7 +431,7 @@ class C
 {
     void M(IServiceCollection services)
     {
-         services.AddServicesToDI();
+         services.Discover();
     }
 }
 [InjectSingleton]
@@ -446,7 +446,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class GeneratedServicesExtension
 {
-    public static void AddServicesToDI(this IServiceCollection services)
+    public static void Discover(this IServiceCollection services)
     {
         services.AddSingleton<MyService>();
     }

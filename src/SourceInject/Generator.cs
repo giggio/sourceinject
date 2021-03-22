@@ -103,7 +103,7 @@ internal class InjectTransientAttribute : System.Attribute
             var methodSymbol = methodSyntax == null ? null : invocationSemanticModel.GetDeclaredSymbol(methodSyntax);
             var code = $@"    public static class GeneratedServicesExtension
     {{
-        public static void AddServicesToDI(this IServiceCollection services)
+        public static void Discover(this IServiceCollection services)
         {{
 {registrations}        }}
     }}";

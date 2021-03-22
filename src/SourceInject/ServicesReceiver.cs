@@ -23,7 +23,7 @@ namespace SourceInject
                         {
                             Identifier:
                             {
-                                ValueText: "AddServicesToDI"
+                                ValueText: "Discover"
                             }
                         }
                     }
