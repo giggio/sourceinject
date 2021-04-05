@@ -71,7 +71,29 @@ internal class InjectTransientAttribute : System.Attribute
                     default:
                         break;
                 }
+                foreach (var interf in ((ITypeSymbol)symbol).AllInterfaces)
+                {
+                    switch (lifetime)
+                    {
+                        case Lifetime.Singleton:
+                            registrations.Append(spaces);
+                            registrations.AppendLine($"services.AddSingleton<{GetFullName(interf)}, {GetFullName(symbol)}>();");
+                            break;
+                        case Lifetime.Scoped:
+                            registrations.Append(spaces);
+                            registrations.AppendLine($"services.AddScoped<{GetFullName(interf)}, {GetFullName(symbol)}>();");
+                            break;
+                        case Lifetime.Transient:
+                            registrations.Append(spaces);
+                            registrations.AppendLine($"services.AddTransient<{GetFullName(interf)}, {GetFullName(symbol)}>();");
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
             }
+
 
             ISymbol? methodSymbol = null;
             if (receiver.InvocationSyntaxNode != null)
