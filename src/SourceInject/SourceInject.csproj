@@ -17,6 +17,7 @@
         <IncludeBuildOutput>false</IncludeBuildOutput>
         <IsPackable>true</IsPackable>
         <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+        <IsRoslynComponent>true</IsRoslynComponent>
     </PropertyGroup>
     <ItemGroup>
         <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />

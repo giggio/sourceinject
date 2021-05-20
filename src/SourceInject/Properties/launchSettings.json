@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SourceInject": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\..\\test\\ConsoleApp\\ConsoleApp.csproj"
+    }
+  }
+}
