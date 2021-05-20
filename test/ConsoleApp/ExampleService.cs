@@ -13,8 +13,13 @@ namespace ConsoleApp
         public string GetValue() => anotherService.Value;
     }
 
+    public interface IAnotherService
+    {
+        string Value { get; }
+    }
+
     [Inject(ServiceLifetime.Singleton)]
-    public class AnotherService
+    public class AnotherService : IAnotherService
     {
         public string Value => "Hello World!";
     }
