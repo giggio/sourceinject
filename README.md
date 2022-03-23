@@ -5,8 +5,7 @@ your dependencies injection during compile time. By doing this
 you avoid using reflection and services are automatically
 registered.
 
-<!-- [![Nuget count](https://img.shields.io/nuget/v/sourceinject.svg)](https://www.nuget.org/packages/sourceinject/) -->
-
+[![NuGet version (sourceinject)](https://img.shields.io/nuget/v/sourceinject?color=blue)](https://www.nuget.org/packages/sourceinject/)
 [![Build](https://github.com/giggio/sourceinject/actions/workflows/dotnet.yml/badge.svg)](https://github.com/giggio/sourceinject/actions/workflows/dotnet.yml)
 [![License](https://img.shields.io/github/license/giggio/sourceinject.svg)](https://github.com/giggio/sourceinject/blob/master/LICENSE.txt)
 
@@ -36,9 +35,9 @@ public class AnotherService
 As you can see above you can define the lifetime. The default lifetime is transient.
 You can also use the following attributes:
 
--   `InjectSingletonAttribute`
--   `InjectScopedAttribute`
--   `InjectTransientAttribute`
+- `InjectSingletonAttribute`
+- `InjectScopedAttribute`
+- `InjectTransientAttribute`
 
 The last one is the same as using `Inject` without any arguments.
 
@@ -66,7 +65,7 @@ The package is available ([on NuGet](https://www.nuget.org/packages/sourceinject
 To install from the command line:
 
 ```shell
-dotnet add package sourceinject --prerelease
+dotnet add package sourceinject
 ```
 
 Or use the Package Manager in Visual Studio.
@@ -83,7 +82,7 @@ to anyone yet, and if it is, talk to that person.
 
 ## Maintainers/Core team
 
--   [Giovanni Bassi](http://blog.lambda3.com.br/L3/giovannibassi/), aka Giggio,
+- [Giovanni Bassi](http://blog.lambda3.com.br/L3/giovannibassi/), aka Giggio,
     [Lambda3](http://www.lambda3.com.br), [@giovannibassi](https://twitter.com/giovannibassi)
 
 Contributors can be found at the [contributors](https://github.com/giggio/sourceinject/graphs/contributors) page on Github.
