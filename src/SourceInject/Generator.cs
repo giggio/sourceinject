@@ -2,7 +2,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
@@ -58,15 +57,15 @@ internal class InjectTransientAttribute : System.Attribute
                 {
                     case Lifetime.Singleton:
                         registrations.Append(spaces);
-                        registrations.AppendLine($"services.AddSingleton<{GetFullName(symbol)}>();");
+                        registrations.AppendLine($"services.AddSingleton<{symbol.ToDisplayString(qualifiedFormat)}>();");
                         break;
                     case Lifetime.Scoped:
                         registrations.Append(spaces);
-                        registrations.AppendLine($"services.AddScoped<{GetFullName(symbol)}>();");
+                        registrations.AppendLine($"services.AddScoped<{symbol.ToDisplayString(qualifiedFormat)}>();");
                         break;
                     case Lifetime.Transient:
                         registrations.Append(spaces);
-                        registrations.AppendLine($"services.AddTransient<{GetFullName(symbol)}>();");
+                        registrations.AppendLine($"services.AddTransient<{symbol.ToDisplayString(qualifiedFormat)}>();");
                         break;
                     default:
                         break;
@@ -77,15 +76,15 @@ internal class InjectTransientAttribute : System.Attribute
                     {
                         case Lifetime.Singleton:
                             registrations.Append(spaces);
-                            registrations.AppendLine($"services.AddSingleton<{GetFullName(interf)}, {GetFullName(symbol)}>();");
+                            registrations.AppendLine($"services.AddSingleton<{interf.ToDisplayString(qualifiedFormat)}, {symbol.ToDisplayString(qualifiedFormat)}>();");
                             break;
                         case Lifetime.Scoped:
                             registrations.Append(spaces);
-                            registrations.AppendLine($"services.AddScoped<{GetFullName(interf)}, {GetFullName(symbol)}>();");
+                            registrations.AppendLine($"services.AddScoped<{interf.ToDisplayString(qualifiedFormat)}, {symbol.ToDisplayString(qualifiedFormat)}>();");
                             break;
                         case Lifetime.Transient:
                             registrations.Append(spaces);
-                            registrations.AppendLine($"services.AddTransient<{GetFullName(interf)}, {GetFullName(symbol)}>();");
+                            registrations.AppendLine($"services.AddTransient<{interf.ToDisplayString(qualifiedFormat)}, {symbol.ToDisplayString(qualifiedFormat)}>();");
                             break;
                         default:
                             break;
@@ -166,31 +165,17 @@ using Microsoft.Extensions.DependencyInjection;
                 return Lifetime.None;
             return injectArg.Value switch
             {
-                // scoped
                 1 => Lifetime.Scoped,
-                // transient
                 2 => Lifetime.Transient,
                 // 0 (singleton) or others
                 _ => Lifetime.Singleton,
             };
         }
 
-        public static string GetFullName(ISymbol symbol)
-        {
-            var ns = symbol.ContainingNamespace;
-            var nss = new List<string>();
-            while (ns != null)
-            {
-                if (string.IsNullOrWhiteSpace(ns.Name))
-                    break;
-                nss.Add(ns.Name);
-                ns = ns.ContainingNamespace;
-            }
-            nss.Reverse();
-            if (nss.Any())
-                return $"{string.Join(".", nss)}.{symbol.Name}";
-            return symbol.Name;
-        }
+        private static readonly SymbolDisplayFormat qualifiedFormat = new(globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers | SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
 
         enum Lifetime
         {
