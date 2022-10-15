@@ -72,6 +72,12 @@ internal class InjectTransientAttribute : System.Attribute
             }
             foreach (var interf in ((ITypeSymbol)symbol).AllInterfaces)
             {
+                if (interf.DeclaredAccessibility != Accessibility.Public &&
+                    !SymbolEqualityComparer.Default.Equals(interf.ContainingModule, context.Compilation.SourceModule))
+                {
+                    continue;
+                }
+
                 switch (lifetime)
                 {
                     case Lifetime.Singleton:
